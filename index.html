@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phoebe's Bat Mitzvah Project — Penguins for Good</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --sky-top: #1a1a4e;
+      --sky-bottom: #2d5fa1;
+      --ice: #e8f4fd;
+      --snow: #ffffff;
+      --accent-pink: #ff6b9d;
+      --accent-orange: #ff9a56;
+      --accent-yellow: #ffd93d;
+      --accent-teal: #4ecdc4;
+      --accent-purple: #a855f7;
+      --text-dark: #1e293b;
+      --text-light: #f8fafc;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--sky-top);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ---- Hero Section ---- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 60%, #87ceeb 80%, var(--ice) 100%);
+      overflow: hidden;
+    }
+
+    /* Stars */
+    .stars {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 60%;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      width: 3px; height: 3px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.3; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* Snowflakes */
+    .snowflake {
+      position: absolute;
+      color: white;
+      font-size: 1rem;
+      opacity: 0.7;
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Penguin Emoji Cluster */
+    .penguin-cluster {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: waddle 2s ease-in-out infinite;
+    }
+    @keyframes waddle {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+    }
+
+    .hero h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-orange), var(--accent-yellow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .subtitle {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      animation: bounce 2s ease infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* ---- Ice / Snow ground sections ---- */
+    .section {
+      padding: 4rem 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .about-section {
+      background: var(--ice);
+      padding: 4rem 1.5rem;
+    }
+    .about-section .section {
+      padding: 0;
+    }
+
+    .about-section h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: var(--sky-top);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .about-section p {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #334155;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+
+    .penguin-divider {
+      text-align: center;
+      font-size: 2rem;
+      margin: 2rem 0;
+      letter-spacing: 1rem;
+    }
+
+    /* ---- Donation Cards ---- */
+    .donate-section {
+      background: linear-gradient(180deg, var(--ice) 0%, #d4ecfc 100%);
+      padding: 4rem 1.5rem;
+    }
+
+    .donate-section h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: var(--sky-top);
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .donate-section .intro {
+      text-align: center;
+      color: #475569;
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    @media (min-width: 600px) {
+      .cards { grid-template-columns: 1fr 1fr; }
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.2rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-top: 4px solid var(--accent-teal);
+    }
+    .card:nth-child(2) { border-top-color: var(--accent-pink); }
+    .card:nth-child(3) { border-top-color: var(--accent-orange); }
+    .card:nth-child(4) { border-top-color: var(--accent-purple); }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    .card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card h3 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: #64748b;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .card a.btn {
+      display: inline-block;
+      padding: 0.7rem 1.8rem;
+      border-radius: 50px;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: white;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card:nth-child(1) a.btn { background: linear-gradient(135deg, var(--accent-teal), #38b2ac); }
+    .card:nth-child(2) a.btn { background: linear-gradient(135deg, var(--accent-pink), #e8457a); }
+    .card:nth-child(3) a.btn { background: linear-gradient(135deg, var(--accent-orange), #e8853f); }
+    .card:nth-child(4) a.btn { background: linear-gradient(135deg, var(--accent-purple), #8b3fd4); }
+
+    .card a.btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      background: var(--sky-top);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-size: 0.95rem;
+    }
+    footer .penguin-footer {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    footer p {
+      margin-bottom: 0.3rem;
+    }
+    footer .heart {
+      color: var(--accent-pink);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======== HERO ======== -->
+  <section class="hero" id="top">
+    <div class="stars" id="stars"></div>
+    <div class="hero-content">
+      <div class="penguin-cluster">🐧</div>
+      <h1><span class="highlight">Penguins for Good</span></h1>
+      <p class="subtitle">Phoebe's Bat Mitzvah Tzedakah Project</p>
+    </div>
+    <div class="scroll-hint">↓ Scroll to learn more ↓</div>
+  </section>
+
+  <!-- ======== ABOUT ======== -->
+  <section class="about-section">
+    <div class="section">
+      <h2>Hi! You found a penguin! 🐧</h2>
+      <p>
+        If you're here, it means you found one of the small rubber penguins
+        I've been distributing as part of my Bat Mitzvah project. Thank you
+        for scanning the QR code!
+      </p>
+      <p>
+        As part of becoming a Bat Mitzvah, I wanted to do something meaningful
+        to help make the world a better place. I chose causes that are close
+        to my heart and I'm asking for your help to support them.
+      </p>
+      <p>
+        Every donation — no matter how small — makes a real difference.
+        Instead of gifts, I'd love for you to consider giving to one of these
+        amazing organizations.
+      </p>
+      <div class="penguin-divider">🐧 🐧 🐧</div>
+    </div>
+  </section>
+
+  <!-- ======== DONATE ======== -->
+  <section class="donate-section" id="donate">
+    <h2>Make a Difference Today</h2>
+    <p class="intro">Choose an organization to support:</p>
+
+    <div class="cards">
+
+      <!-- CHARITY 1 — Replace href and details -->
+      <div class="card">
+        <div class="icon">🌊</div>
+        <h3>Charity Name 1</h3>
+        <p>A brief description of what this charity does and why it matters to you.</p>
+        <a href="https://example.com/donate1" class="btn" target="_blank" rel="noopener">Donate</a>
+      </div>
+
+      <!-- CHARITY 2 — Replace href and details -->
+      <div class="card">
+        <div class="icon">🏠</div>
+        <h3>Charity Name 2</h3>
+        <p>A brief description of what this charity does and why it matters to you.</p>
+        <a href="https://example.com/donate2" class="btn" target="_blank" rel="noopener">Donate</a>
+      </div>
+
+      <!-- CHARITY 3 — Replace href and details -->
+      <div class="card">
+        <div class="icon">📚</div>
+        <h3>Charity Name 3</h3>
+        <p>A brief description of what this charity does and why it matters to you.</p>
+        <a href="https://example.com/donate3" class="btn" target="_blank" rel="noopener">Donate</a>
+      </div>
+
+      <!-- CHARITY 4 — Replace href and details -->
+      <div class="card">
+        <div class="icon">💚</div>
+        <h3>Charity Name 4</h3>
+        <p>A brief description of what this charity does and why it matters to you.</p>
+        <a href="https://example.com/donate4" class="btn" target="_blank" rel="noopener">Donate</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======== FOOTER ======== -->
+  <footer>
+    <div class="penguin-footer">🐧</div>
+    <p>Made with <span class="heart">♥</span> by Phoebe</p>
+    <p>Thank you for being part of my Bat Mitzvah journey!</p>
+  </footer>
+
+  <!-- ======== SCRIPTS ======== -->
+  <script>
+    // Generate stars
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 60; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 2 + 's';
+      star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
+      starsContainer.appendChild(star);
+    }
+
+    // Generate snowflakes
+    const hero = document.querySelector('.hero');
+    for (let i = 0; i < 25; i++) {
+      const flake = document.createElement('div');
+      flake.className = 'snowflake';
+      flake.textContent = '❄';
+      flake.style.left = Math.random() * 100 + '%';
+      flake.style.fontSize = (Math.random() * 0.8 + 0.6) + 'rem';
+      flake.style.opacity = Math.random() * 0.5 + 0.3;
+      flake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      flake.style.animationDelay = Math.random() * 10 + 's';
+      hero.appendChild(flake);
+    }
+  </script>
+</body>
+</html>
